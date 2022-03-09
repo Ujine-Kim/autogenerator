@@ -1,0 +1,55 @@
+table_name: lnk_fin_document_name_document
+explicit_columns: true
+
+columns:
+
+- name: fin_document_name_document_rk
+  nullable: false
+  type:
+    type_class: BIGINT
+
+- name: fin_document_rk
+  nullable: false
+  type:
+    type_class: BIGINT
+
+- name: name_document_rk
+  nullable: false
+  type:
+    type_class: BIGINT
+
+- name: src_cd
+  nullable: false
+  type:
+    type_class: VARCHAR
+    length: 32
+
+- name: version_id
+  nullable: false
+  type:
+    type_class: BIGINT
+
+- name: deleted_flg
+  nullable: false
+  type:
+    type_class: BOOLEAN
+
+datastore:
+
+  key_fields: 
+  - fin_document_name_document_rk
+  # - version_id
+  
+  link: fin_document_name_document
+  
+  delta_mode: new
+
+  column_groups:
+    rk: 
+    - fin_document_name_document_rk
+    - fin_document_rk
+    - name_document_rk
+    mgmt: 
+    - src_cd
+    - version_id
+    - deleted_flg

@@ -1,0 +1,63 @@
+table_name: lsat_fin_document_name_document_cftm
+explicit_columns: true
+
+columns:
+- name: fin_document_name_document_rk
+  nullable: false
+  type:
+    type_class: BIGINT
+
+- name: hash_diff
+  nullable: false
+  type:
+    type_class: VARCHAR
+    length: 32 
+
+- name: src_cd
+  nullable: false
+  type:
+    type_class: VARCHAR
+    length: 32    
+
+- name: version_id
+  nullable: false
+  type:
+    type_class: BIGINT
+
+- name: deleted_flg
+  nullable: false
+  type:
+    type_class: BOOLEAN
+
+- name: valid_flg
+  nullable: false
+  type:
+    type_class: BOOLEAN
+
+- name: effective_date
+  nullable: false
+  type:
+    type_class: DATE    
+    
+
+datastore:
+  key_fields:
+  - fin_document_name_document_rk
+  - version_id
+  - effective_date  
+  satellite: fin_document_name_document_cftm
+  column_groups:
+    data: []
+    rk:
+    - fin_document_name_document_rk
+    mgmt:
+    - src_cd
+    - version_id
+    - deleted_flg
+    valid_flg:
+    - valid_flg
+    hash_:
+    - hash_diff
+  delta_mode: new    
+  hash_diff:
+    src_fields: []
