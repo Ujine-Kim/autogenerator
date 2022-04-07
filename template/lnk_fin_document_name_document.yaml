@@ -35,15 +35,10 @@ columns:
     type_class: BOOLEAN
 
 datastore:
-
   key_fields: 
   - fin_document_name_document_rk
-  # - version_id
-  
   link: fin_document_name_document
-  
   delta_mode: new
-
   column_groups:
     rk: 
     - fin_document_name_document_rk

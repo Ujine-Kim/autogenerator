@@ -1,0 +1,88 @@
+schema_version: 2
+table_name: h2_z_tablename_subalgcode
+explicit_columns: True
+
+columns:
+- name: ods$effective_from_dt
+  type:
+    type_class: TIMESTAMP
+
+- name: ods$effective_to_dt
+  type:
+    type_class: TIMESTAMP
+
+- name: ods$effective_from_csn
+  type:
+    type_class: BIGINT
+
+- name: ods$effective_to_csn
+  type:
+    type_class: BIGINT
+
+- name: ods$is_active_flg
+  type:
+    type_class: VARCHAR
+    length: 1 
+
+- name: ods$deleted_flg
+  type:
+    type_class: VARCHAR
+    length: 1
+
+- name: ods$create_id
+  type:
+    type_class: DECIMAL
+    precision: 22
+    scale: 0
+
+- name: ods$update_id
+  type:
+    type_class: DECIMAL
+    precision: 22
+    scale: 0
+
+- name: ods$processed_dt
+  type:
+    type_class: TIMESTAMP
+
+- name: effective_date
+  type:
+    type_class: DATE
+    
+datastore:
+  source_system: CFTM
+  data_capture_mode: increment
+  data_source_type: ODS_SCD2
+  synthetic_history:
+    syn_history_function: syn_bussiness_date_trunc
+    func_param:
+    - param_source: field
+      param_value: ods$effective_from_dt
+    - param_source: const
+      param_value: day
+    destination_field: effective_date
+  key_fields:
+  - id
+  - effective_date
+  column_groups:
+    data: []
+  business_keys: 
+  - business_key: key1_num_id
+    required: false
+    field_map: 
+    satellites:
+      - satellite: sat_name
+        field_map:
+          ods$effective_from_dt: effective_date
+  data_quality_checks: []
+  links: []
+
+  references: []
+
+creation:
+  ora_table: H2_Z#TABLENAMECAPS
+  ora_schema: $ODS_SINT
+  parallelism:
+    ora_parallel_amount: 4
+    ora_part_field_name: ODS$EFFECTIVE_TO_CSN
+    ora_part_field_type: int

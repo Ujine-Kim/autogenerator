@@ -7,7 +7,7 @@ from ruamel.yaml.comments import CommentedMap as OrderedDict
 
 def getTemplate(filetype):
     yaml_reader = YAML()
-    with open('template\\h2_z_tablename_subalgcode'+filetype+'.yaml','r') as f:
+    with open('template\\h2_z_tablename_subalgcode_lsat.yaml','r') as f:
         template = yaml_reader.load(f.read())
         #yaml_reader.dump(template,sys.stdout)
         return template
